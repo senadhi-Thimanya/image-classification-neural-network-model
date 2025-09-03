@@ -2,6 +2,8 @@
 
 This project demonstrates building a deep learning-based image classification model using TensorFlow and Keras to classify images of fruits and vegetables. The model is trained on a dataset of 36 classes of fruits and vegetables, achieves high accuracy, and is deployed as a simple web application using Streamlit.
 
+<img width="923" height="583" alt="image" src="https://github.com/user-attachments/assets/2e850b09-5971-4b0f-9343-76b44488b861" />
+
 The project is based on the YouTube tutorial by [KothaEd](https://www.youtube.com/channel/UCZ0RhgwvVWKwK79rZCLYTpg): [Image Classification Deep Learning Neural Network Model in Python with TensorFlow](https://www.youtube.com/watch?v=V61xy1ZnVTM).
 
 ## Project Overview
