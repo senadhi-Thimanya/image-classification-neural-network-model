@@ -44,7 +44,7 @@ data_cat = ['apple',
  'watermelon']
 img_height = 180
 img_width = 180
-image =st.text_input('Enter Image name','Apple.jpg')
+image =st.text_input('Enter Image name','images/Apple.jpg')
 
 image_load = tf.keras.utils.load_img(image, target_size=(img_height,img_width))
 img_arr = tf.keras.utils.array_to_img(image_load)
