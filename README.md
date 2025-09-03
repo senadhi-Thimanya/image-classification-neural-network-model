@@ -4,7 +4,7 @@ This project demonstrates building a deep learning-based image classification mo
 
 Demo: https://image-classification-neural-network-model.streamlit.app/
 
-<img width="923" height="583" alt="image" src="https://github.com/user-attachments/assets/2e850b09-5971-4b0f-9343-76b44488b861" />
+<img width="1908" height="1416" alt="webapp" src="https://github.com/user-attachments/assets/87ffaab0-8def-440d-8690-3a980835ac54" />
 
 The project is based on the YouTube tutorial by [KothaEd](https://www.youtube.com/channel/UCZ0RhgwvVWKwK79rZCLYTpg): [Image Classification Deep Learning Neural Network Model in Python with TensorFlow](https://www.youtube.com/watch?v=V61xy1ZnVTM).
 
