@@ -6,14 +6,18 @@ from PIL import Image
 import numpy as np
 import requests
 from io import BytesIO
+import os
+from huggingface_hub import hf_hub_download
 
 st.header("Image Classification Model")
 
-@st.cache_resource
-def get_model():
-    return load_model("Image_classify.keras")
+model_path = hf_hub_download(
+    repo_id="Raemih/fruit-veg-img-classifier",
+    filename="Image_classify.keras",
+    token=os.environ.get("HF_TOKEN")
+)
 
-model = get_model()
+model = tf.keras.models.load_model(model_path)
 
 data_cat = ['apple','banana','beetroot','bell pepper','cabbage','capsicum','carrot',
  'cauliflower','chilli pepper','corn','cucumber','eggplant','garlic','ginger',
