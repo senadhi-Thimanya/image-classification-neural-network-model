@@ -2,9 +2,10 @@
 
 This project demonstrates building a deep learning-based image classification model using TensorFlow and Keras to classify images of fruits and vegetables. The model is trained on a dataset of 36 classes of fruits and vegetables, achieves high accuracy, and is deployed as a simple web application using Streamlit.
 
-Demo: https://image-classification-neural-network-model.streamlit.app/
-
 <img width="1908" height="1522" alt="img" src="https://github.com/user-attachments/assets/c0ac4f3e-11fd-4769-bfbf-d58590128429" />
+
+Demo: https://image-classification-neural-network-model.streamlit.app/
+Model: https://huggingface.co/Raemih/fruit-veg-img-classifier
 
 ## Credit to Original Tutorial
 
@@ -66,7 +67,7 @@ pip install tensorflow streamlit numpy pandas matplotlib huggingface_hub
 - `app.py`: Streamlit web app script for deploying the model.
 - `requirements.txt`: Requirements to install when running the Streamlit web app.
 - `.env`: Add the huggingface access token.
-- `image_classifier.keras`: Saved trained model file (not included in repo; download from huggingface).
+- `image_classifier.keras`: Saved trained model file.
 - `fruits_vegetables/`: Dataset folder (not included in repo; download separately).
 - `.venv/`: Python kernel environment for the jupyter notebooks to run (not included in the repo; create seperately.)
 - `model-to-hf.py`: Python file used to pass the model to huggingface.
@@ -126,11 +127,12 @@ git clone https://github.com/senadhi-Thimanya/image-classification-neural-networ
 ```
 - Create a python virtual environment (kernal to run the ipynb files)
 - Run `image-classification-model-refine.ipynb` and save the model
+- Run `model-to-hf.py` to pass the model to huggingface
 - run the streamlit web app command on the terminal, inside the .venv 
 ```
 streamlit run app.py
 ```
-Access at http://localhost:8501 or use the online demo link.
+Access at http://localhost:8501 or connect streamlit to your github repository and upload the app to use online.
 
 ### For new images:
 
