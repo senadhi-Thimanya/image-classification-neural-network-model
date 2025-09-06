@@ -4,8 +4,9 @@ This project demonstrates building a deep learning-based image classification mo
 
 <img width="1908" height="1522" alt="img" src="https://github.com/user-attachments/assets/c0ac4f3e-11fd-4769-bfbf-d58590128429" />
 
-Demo: https://image-classification-neural-network-model.streamlit.app/
-Model: https://huggingface.co/Raemih/fruit-veg-img-classifier
+Demo: [Go to Streamlit webapp](https://image-classification-neural-network-model.streamlit.app/)
+
+Model: [Go to HuggingFace](https://huggingface.co/Raemih/fruit-veg-img-classifier)
 
 ## Credit to Original Tutorial
 
