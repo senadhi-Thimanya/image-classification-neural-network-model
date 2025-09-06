@@ -4,9 +4,11 @@ This project demonstrates building a deep learning-based image classification mo
 
 Demo: https://image-classification-neural-network-model.streamlit.app/
 
-<img width="1908" height="1416" alt="webapp" src="https://github.com/user-attachments/assets/87ffaab0-8def-440d-8690-3a980835ac54" />
+<img width="1908" height="1522" alt="img" src="https://github.com/user-attachments/assets/c0ac4f3e-11fd-4769-bfbf-d58590128429" />
 
-The project is based on the YouTube tutorial by [KothaEd](https://www.youtube.com/channel/UCZ0RhgwvVWKwK79rZCLYTpg): [Image Classification Deep Learning Neural Network Model in Python with TensorFlow](https://www.youtube.com/watch?v=V61xy1ZnVTM).
+## Credit to Original Tutorial
+
+This project is initially based on the YouTube tutorial by [KothaEd](https://www.youtube.com/channel/UCZ0RhgwvVWKwK79rZCLYTpg): [Image Classification Deep Learning Neural Network Model in Python with TensorFlow](https://www.youtube.com/watch?v=V61xy1ZnVTM). The tutorial provided the foundational steps for data preprocessing, model building, training, and initial Streamlit deployment. Subsequent enhancements were made to improve accessibility, model performance, and user experience.
 
 ## Project Overview
 
@@ -14,14 +16,16 @@ The project is based on the YouTube tutorial by [KothaEd](https://www.youtube.co
 - **Approach**:
   - Preprocess image data from folders into arrays using TensorFlow.
   - Build a sequential Convolutional Neural Network (CNN) model with multiple layers.
-  - Train the model using training and validation datasets.
+  - Train the model using training and validation datasets with data augmentation.
   - Evaluate the model on test data and new images.
-  - Deploy the model as a web app for interactive predictions.
+  - Deploy the model as a web app for interactive predictions, hosted online for easy access.
 - **Key Features**:
   - Handles image resizing, shuffling, and batching.
-  - Uses validation data to prevent overfitting.
+  - Uses validation data and data augmentation to prevent overfitting and improve generalization.
   - Visualizes training accuracy and loss.
-  - Web app allows users to input image names and view predictions with accuracy scores.
+  - Web app supports multiple input methods: pasting image URLs, drag-and-drop uploads, or browsing local files.
+  - Model hosted on Hugging Face for seamless integration.
+  - Achieves Top-3 Accuracy of 0.96657383 after enhanced training.
 
 ## Dataset
 
@@ -47,76 +51,90 @@ Place the dataset in a folder named `fruits_vegetables` with subfolders for `tra
   - Pandas
   - Matplotlib
   - Streamlit
+  - Hugging Face Hub (for model hosting)
 
 Install dependencies:
 ```
-pip install tensorflow streamlit numpy pandas matplotlib
+pip install tensorflow streamlit numpy pandas matplotlib huggingface_hub
 ```
 
 ## Project Structure
 
-- `image_classification_model.ipynb`: Jupyter notebook for data preprocessing, model building, training, and evaluation.
+- `image-classification-model.ipynb`: Original Jupyter notebook for data preprocessing, model building, training, and evaluation.
+- `image-classification-model-refine.ipynb`: Modified Jupyter notebook for data preprocessing, model building and training.
+- `model-evaluation.ipynb`: Jupyter notebook for model evaluations.
 - `app.py`: Streamlit web app script for deploying the model.
-- `image_classifier.keras`: Saved trained model file.
+- `requirements.txt`: Requirements to install when running the Streamlit web app.
+- `.env`: Add the huggingface access token.
+- `image_classifier.keras`: Saved trained model file (not included in repo; download from huggingface).
 - `fruits_vegetables/`: Dataset folder (not included in repo; download separately).
-- `images/`: Folder for test images (e.g., apple.jpg, banana.jpg).
-- `README.md`: This file.
+- `.venv/`: Python kernel environment for the jupyter notebooks to run (not included in the repo; create seperately.)
+- `model-to-hf.py`: Python file used to pass the model to huggingface.
 
-## Usage
+## Workflow
 
-### 1. Training the Model
-- Open `image_classification_model.ipynb` in Jupyter Lab/Notebook or VS Code.
-- Update paths to the dataset folders.
-- Run the cells to:
-  - Load and preprocess data.
-  - Build the sequential CNN model.
-  - Train for 25 epochs.
-  - Visualize accuracy and loss.
-  - Save the model as `image_classifier.keras`.
+### 1. Data Preprocessing
 
-Model Architecture Summary:
-- Rescaling layer (divide by 255).
-- 3 Conv2D + MaxPooling2D layers (16, 32, 64 filters).
-- Flatten layer.
-- Dropout (0.2).
-- Dense layers (128 units, then 36 output units with softmax).
+- Load images from the `fruits_vegetables` dataset folders.
+- Resize images to a consistent size (180x180).
+- Apply data augmentation techniques (e.g., random flips, rotations, zooms) to increase dataset diversity and improve model robustness.
+- Shuffle and batch the data for efficient training.
+- Split into training, validation, and test sets.
+
+### 2. Model Building and Training
+
+- Build a sequential CNN model:
+  - Rescaling layer (divide by 255).
+  - 3 Conv2D + MaxPooling2D layers (16, 32, 64 filters).
+  - Flatten layer.
+  - Dropout (0.2).
+  - Dense layers (128 units, then 36 output units with softmax).
 - Optimizer: Adam
 - Loss: Sparse Categorical Crossentropy
-- Metrics: Accuracy
+- Metrics: Accuracy (including Top-3 Accuracy for evaluation)
+- Train for 39 epochs with data augmentation.
+- Visualize accuracy and loss curves to monitor performance.
+- Save the model as `image_classifier.keras` and upload to Hugging Face for version control and easy access.
 
-After 25 epochs, expect ~95-98% training accuracy and ~80-90% validation accuracy.
+### 3. Model Evaluation and Testing
 
-### 2. Testing the Model
-- In the notebook, load test images and predict using the model.
-- Example: Predicts "apple" with 99.95% accuracy on sample images.
+- load the test data
+- run the `model-evaluation.ipynb` file to get the evaluation results of matrices:
+  - Confusion matrix
+  - precision/recall/f1 score
+  - Top-3 accuracy
 
-### 3. Deploying the Web App
-- Run the Streamlit app:
-  ```
-  streamlit run app.py
-  ```
-- Open the local URL (e.g., http://localhost:8501).
-- Enter an image name (e.g., "apple.jpg" from the `images/` folder).
-- The app displays the image and predicts the class with accuracy (e.g., "Fruit in image is apple with an accuracy of 99.95%").
 
-For new images:
-- Download images from Google or elsewhere.
-- Place them in the `images/` folder.
-- Input the filename in the app.
+After training, the model achieves ~95-98% training accuracy, ~85-95% validation accuracy, and a Top-3 Accuracy of 0.96657383 on test data.
 
-## Video Breakdown
-The tutorial video covers:
-- 0:00 - 0:07: Project Intro
-- 0:08 - 01:26: Demo
-- 01:26 - 03:07: Model Explanation
-- 03:07 - 16:52: Data Preprocessing
-- 16:52 - 33:55: Model Creation and Training
-- 33:55 - 40:19: Predictions
-- 40:20 - 53:59: Web App Deployment
+### 4. Deployment as Web App
 
-## Credits
-- Tutorial by [KothaEd](https://www.youtube.com/channel/UCZ0RhgwvVWKwK79rZCLYTpg)
-- Code Link from Video: [Google Drive Code](https://drive.google.com/file/d/1rIXgFJLW-I2oUNRi1TAAA3yWmz053lkk/view?usp=sharing)
+- The app is deployed online via Streamlit Sharing, accessible without cloning the repository.
+- Model is loaded from Hugging Face using an access token for security and reliability.
+- User Input Options:
+  - Paste an image URL (e.g., from a Google search).
+  - Drag and drop an image file.
+  - Browse and upload a local image file.
+- The app processes the input, displays the image, and outputs the predicted class with accuracy (e.g., "Fruit in image is apple with an accuracy of 99.95%").
+
+## To run locally (optional):
+
+- Download the dataset [Google Drive Dataset](https://drive.google.com/file/d/1CGiAWso43GCsNo_faRq4jdDIlmwy7YI4/view?usp=sharing)
+- Clone the repository to VS Code
+```
+git clone https://github.com/senadhi-Thimanya/image-classification-neural-network-model.git
+```
+- Create a python virtual environment (kernal to run the ipynb files)
+- Run `image-classification-model-refine.ipynb` and save the model
+- run the streamlit web app command on the terminal, inside the .venv 
+```
+streamlit run app.py
+```
+Access at http://localhost:8501 or use the online demo link.
+
+### For new images:
+
+No need to download or push to GitHub; use URL paste, drag-and-drop, or browse directly in the app.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
